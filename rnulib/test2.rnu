@@ -1,0 +1,9 @@
+/*File 3 test*/
+
+:file3
+    push_num 6
+    push_num 8
+    set_pointer
+    halt
+ret
+

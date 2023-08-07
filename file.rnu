@@ -1,0 +1,124 @@
+[$include "rnulib/macros.rnu"]
+:start jmp main 
+
+:main sp_push 4
+
+    push_num 64
+    sp_set 0
+    call test
+
+    push_num string2
+    call_ex println
+
+    sp_get 0
+    call_ex println_num
+    
+
+
+    PUSH_2 string_test,1
+    thread_pw
+    sp_set -1
+
+    push_num 5
+    sp_get -1
+    thread_push
+
+    sp_get -1
+    thread_start
+
+    sp_get -1
+    wait
+
+    sp_get 0
+    call_ex println_num
+
+
+    push_num code_test
+    call_ex compile
+    call_p
+
+
+    /*#########ARG_TEST#############*/
+    push_num 2
+    push_num 3
+    call arg_test
+    pop,1 /*arg count = 2 - 1 return*/
+    call_ex println_num
+
+
+    /*######### IF EVENT TEST#############*/
+    call,if_event
+sp_pop halt 
+
+:arg_test sp_push 4
+    sp_get,-5
+    sp_get,-6
+    heap_set
+
+    push_num 99
+    sp_set,-6
+
+sp_pop ret
+
+
+:test sp_push 1
+    
+    push_num 32
+    sp_set 0
+    sp_get 0
+    call_ex println_num 
+
+sp_pop ret
+
+:string_test sp_push 4 /*arg0*/
+    
+    push_num 5
+    sp_get,-5
+    heap_set
+
+
+    push_num 20
+    call_ex malloc /*malloc 10*/
+    sp_set,0
+
+    sp_get,0
+    PUSH_2,string3,13
+    call_ex memcpy
+
+    sp_get,0
+    call_ex println
+sp_pop halt
+
+
+
+:if_event
+
+    PUSH_2 3 4
+
+    eql,jez,if_false0, /*if 2==3 : false */
+        push_num,20
+        call_ex println_num 
+    :if_false0
+
+    push_num,30
+    call_ex println_num 
+
+
+ret
+
+:string2 "hello world!"
+:string3 "hollo worod!"
+:code_test
+"
+push_num 4 
+push_num 4 
+heap_set push_num 
+string call_ex 
+print 
+ret 
+
+:string [$b8 
+104 101 108 108 111 111 32 58 41 32 116 104 105 115 32 116 101 120 116 
+32 105 115 32 99 111 109 112 105 108 101 100 32 97 102 116 101 114 
+32 102 114 111 109 32 97 110 32 115 116 114 105 110 103 46 10]
+"

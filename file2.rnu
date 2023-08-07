@@ -1,0 +1,64 @@
+[$include "rnulib/test.rnu" "rnulib/macros.rnu"]
+
+[$label case_num iota]
+[$label hell 68]
+
+
+:start 
+    jmp main 
+:main
+    push_num string2
+    push_num string1
+    call_ex print
+    call_ex print
+
+    SETP case_num 2
+    jmp jump_table 
+halt 
+
+:jump_table 
+    GETP case_num
+    push_num size_t
+    PUSH_MUL_SIGN 2
+    mul_signed
+    PUSH_ADD_SIGN jump_table_start 
+    jmp_p 
+
+:jump_table_start 
+    jmp case0 
+    jmp case1 
+    jmp case2 
+
+:case0 
+    SETP 4 10
+    halt 
+
+:case1 
+    SETP 4 11
+    halt 
+
+:case2 
+    SETP 4 hell
+    jmp testy 
+    halt 
+
+:testy 
+    call test_func
+    SETP 8 6
+    halt 
+
+:test_func 
+    PUSH_3 3 10 5
+    add_signed /* 10+5 */ 
+    mul_signed /* 15*3 */
+    push_num 6
+    heap_set /* [6] = 45 */ 
+    call file2
+ret
+
+:string1 [$b8 65 66 67 68 10]
+:string2 "
+   hello   
+   2   2 
+   [aaa]
+   " 

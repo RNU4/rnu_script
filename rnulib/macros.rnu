@@ -1,0 +1,41 @@
+
+[$label byte8 1]
+[$label byte16 2]
+[$label byte32 4]
+[$label byte64 8]
+
+[$label true 1]
+[$label false 0]
+
+[$macro SETP 2
+push_num arg1
+push_num arg0
+heap_set]
+
+[$macro GETP 1
+push_num arg0 
+heap_get]
+
+
+[$macro PUSH_ADD_SIGN 1
+push_num arg0 
+add_signed]
+
+[$macro PUSH_MUL_SIGN 1
+push_num arg0 
+mul_signed]
+
+[$macro PUSH_2 2
+push_num arg0 
+push_num arg1]
+
+[$macro PUSH_3 3
+push_num arg0 
+push_num arg1
+push_num arg2]
+
+[$macro PUSH_4 4
+push_num arg0 
+push_num arg1
+push_num arg2
+push_num arg3]

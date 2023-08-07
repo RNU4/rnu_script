@@ -1,0 +1,14 @@
+:file2
+    push_num 6
+    push_num 7
+    heap_set
+    thread thread_test 1
+ret
+
+
+
+:thread_test
+	push_num 9
+	push_num 9
+	heap_set
+halt

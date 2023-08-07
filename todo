@@ -1,0 +1,20 @@
+/*TODO*/
+* more instructions
+
+
+
+/*working on*/
+
+
+/*DONE*/
+* a way to return a value from a function
+
+* change how functions work to call code from pointer leading to different place in memory
+uint64 code_func[] = {"code"}
+uint64 code[] = {call,code_func}
+
+*basic assembler
+
+* multithreading with linked list (private stacks for threads)
+* lock and unlock threads
+* thread priority
